@@ -65,7 +65,7 @@ public class User {
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username));
         if (rs.isExhausted()) {
-            System.out.println("No Images returned");
+            System.out.println("User Not Found");
             return false;
         } else {
             for (Row row : rs) {
@@ -76,7 +76,7 @@ public class User {
             }
         }
    
-    
+    System.out.println("Incorrect Password");
     return false;  
     }
        public void setCluster(Cluster cluster) {
