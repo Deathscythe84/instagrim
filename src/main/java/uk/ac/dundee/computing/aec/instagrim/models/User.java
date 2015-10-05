@@ -28,6 +28,14 @@ public class User {
     }
     
     public boolean RegisterUser(String username, String Password){
+        
+        if(UserExist(username))
+        {
+            System.out.println("User Already Exists");
+            return false;
+        }
+        else
+        {        
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
         try {
@@ -45,7 +53,19 @@ public class User {
                         username,EncodedPassword));
         //We are assuming this always works.  Also a transaction would be good here !
         
-        return true;
+        //Check that the user details were inserted corectly
+        if(IsValidUser(username,Password))
+            return true;
+        else
+        {
+        ps = session.prepare("delete from userprofiles where login = ?");
+        boundStatement = new BoundStatement(ps);
+        session.execute( // this is where the query is executed
+            boundStatement.bind( // here you are binding the 'boundStatement'
+                username));
+            return false;
+        }
+        }
     }
     
     public boolean IsValidUser(String username, String Password){
@@ -83,5 +103,19 @@ public class User {
         this.cluster = cluster;
     }
 
-    
+    private boolean UserExist(String username){
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        username));
+        if (rs.isExhausted()) {
+            System.out.println("User Not Found, Good");
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
