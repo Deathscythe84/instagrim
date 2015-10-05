@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +29,7 @@ public class Register extends HttpServlet {
     Cluster cluster=null;
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
+        super.init(config);
         cluster = CassandraHosts.getCluster();
     }
 
@@ -52,7 +54,10 @@ public class Register extends HttpServlet {
         us.setCluster(cluster);
         us.RegisterUser(username, password);
         
-	response.sendRedirect("/Instagrim");
+        //Auto Login code
+        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Login");
+        rd.forward(request, response);
+	//response.sendRedirect("/Instagrim");
         
     }
 
