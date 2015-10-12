@@ -60,27 +60,12 @@ public class Logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    protected void service(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //processRequest(request, response);
-        HttpSession session=request.getSession();
-            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-                if(lg != null)
-                {
-                    session.removeAttribute("LoggedIn");
-                    session.invalidate();
-                    //session.setAttribute("LoggedIn", null);
-                    //response.sendRedirect("/Instagrim/index.jsp");
-                    request.getRequestDispatcher("/index.jsp").forward(request, response);
-                }
-                else
-                {
-                    //response.sendRedirect("/Instagrim/index.jsp");
-                    request.getRequestDispatcher("/index.jsp").forward(request, response);
-                }
+        
+                HttpSession session=request.getSession();
+                //session.removeAttribute("LoggedIn");
+                session.invalidate();
+                //session.setAttribute("LoggedIn", null);
+                response.sendRedirect("/Instagrim/index.jsp");
     }
     
     /**

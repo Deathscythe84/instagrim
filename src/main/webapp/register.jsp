@@ -26,6 +26,8 @@
        
         <article>
             <h3>Register as user</h3>
+            <% String error = (String) request.getAttribute("Error");
+            if(error!=null){%><%=error%><%}%>
             <form method="POST"  action="Register">
                 <ul>
                     <li>User Name <input type="text" name="username"></li>

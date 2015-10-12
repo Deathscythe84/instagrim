@@ -28,14 +28,7 @@ public class User {
     }
     
     public boolean RegisterUser(String username, String Password){
-        
-        if(UserExist(username))
-        {
-            System.out.println("User Already Exists");
-            return false;
-        }
-        else
-        {        
+
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
         try {
@@ -64,7 +57,6 @@ public class User {
             boundStatement.bind( // here you are binding the 'boundStatement'
                 username));
             return false;
-        }
         }
     }
     
@@ -103,7 +95,7 @@ public class User {
         this.cluster = cluster;
     }
 
-    private boolean UserExist(String username){
+    public boolean UserExist(String username){
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
         ResultSet rs = null;

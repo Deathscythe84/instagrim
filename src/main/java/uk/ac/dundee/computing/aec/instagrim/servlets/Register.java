@@ -49,15 +49,32 @@ public class Register extends HttpServlet {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
         
-        User us=new User();
-        us.setCluster(cluster);
-        us.RegisterUser(username, password);
-        
-        //Auto Login code
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Login");
-        rd.forward(request, response);
-	//response.sendRedirect("/Instagrim");
-        
+        if(username == "" || password == "")
+        {
+            request.setAttribute("Error", "Username And Password Required");
+            RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
+            rd.forward(request,response);
+        }
+        else
+        {
+            User us=new User();
+            us.setCluster(cluster);
+            boolean userexist = us.UserExist(username);
+            if(userexist)
+            {
+                request.setAttribute("Error", "Username Already Taken");
+                RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
+                rd.forward(request,response);
+            }
+            else{
+            us.RegisterUser(username, password);
+
+            //Auto Login code
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Login");
+            rd.forward(request, response);
+            //response.sendRedirect("/Instagrim");
+            }
+        }
     }
 
     /**

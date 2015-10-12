@@ -73,11 +73,10 @@ public class Login extends HttpServlet {
 
                 session.setAttribute("LoggedIn", lg);
                 System.out.println("Session in servlet "+session);
-                RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
-                rd.forward(request,response);
+                response.sendRedirect("index.jsp");
 
             }else{
-                request.setAttribute("Error", "Username Or Password Incorrect");
+                request.setAttribute("Error", "Username Or Password Not Found");
                 RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
                 rd.forward(request,response);
             }
