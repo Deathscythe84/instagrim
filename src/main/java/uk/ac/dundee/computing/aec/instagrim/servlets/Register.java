@@ -48,6 +48,12 @@ public class Register extends HttpServlet {
             throws ServletException, IOException {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
+        String fname=request.getParameter("firstname");
+        String sname=request.getParameter("lastname");
+        String email=request.getParameter("email");
+        String addressstreet=request.getParameter("addressstreet");
+        String addresscity=request.getParameter("addresscity");
+        String addresszip=request.getParameter("addresszip");
         
         if(username == "" || password == "")
         {
@@ -67,7 +73,7 @@ public class Register extends HttpServlet {
                 rd.forward(request,response);
             }
             else{
-            us.RegisterUser(username, password);
+            us.RegisterUser(username, password,fname,sname,email,addressstreet,addresscity,addresszip);
 
             //Auto Login code
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Login");

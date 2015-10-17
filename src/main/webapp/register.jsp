@@ -32,6 +32,12 @@
                 <ul>
                     <li>User Name <input type="text" name="username"></li>
                     <li>Password <input type="password" name="password"></li>
+                    <li>First Name <input type="text" name="firstname"></li>
+                    <li>Last Name <input type="text" name="lastname"></li>
+                    <li>Email <input type="email" name="email"></li>
+                    <li>Address:Street <input type="text" name="addressstreet"></li>
+                    <li>Address:City <input type="text" name="addresscity"></li>
+                    <li>Address:Zip Code <input type="int" name="addresszip"></li>
                 </ul>
                 <br/>
                 <input type="submit" value="Register"> 
