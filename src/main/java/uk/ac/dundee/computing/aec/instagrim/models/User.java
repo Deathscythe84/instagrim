@@ -28,6 +28,7 @@ public class User {
     }
     
     public boolean RegisterUser(String username, String Password){
+
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
         try {
@@ -45,7 +46,18 @@ public class User {
                         username,EncodedPassword));
         //We are assuming this always works.  Also a transaction would be good here !
         
-        return true;
+        //Check that the user details were inserted corectly
+        if(IsValidUser(username,Password))
+            return true;
+        else
+        {
+        ps = session.prepare("delete from userprofiles where login = ?");
+        boundStatement = new BoundStatement(ps);
+        session.execute( // this is where the query is executed
+            boundStatement.bind( // here you are binding the 'boundStatement'
+                username));
+            return false;
+        }
     }
     
     public boolean IsValidUser(String username, String Password){
@@ -65,7 +77,7 @@ public class User {
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username));
         if (rs.isExhausted()) {
-            System.out.println("No Images returned");
+            System.out.println("User Not Found");
             return false;
         } else {
             for (Row row : rs) {
@@ -76,12 +88,26 @@ public class User {
             }
         }
    
-    
+    System.out.println("Incorrect Password");
     return false;  
     }
        public void setCluster(Cluster cluster) {
         this.cluster = cluster;
     }
 
-    
+    public boolean UserExist(String username){
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        username));
+        if (rs.isExhausted()) {
+            System.out.println("User Not Found, Good");
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
