@@ -37,7 +37,7 @@
                     <li>Email <input type="email" name="email"></li>
                     <li>Address:Street <input type="text" name="addressstreet"></li>
                     <li>Address:City <input type="text" name="addresscity"></li>
-                    <li>Address:Zip Code <input type="int" name="addresszip"></li>
+                    <li>Address:Zip Code <input type="text" name="addresszip"></li>
                 </ul>
                 <br/>
                 <input type="submit" value="Register"> 
