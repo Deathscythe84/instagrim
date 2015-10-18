@@ -19,6 +19,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
@@ -159,6 +160,39 @@ public class User {
             }
         //System.out.println("Email Not Found");
         return false;
+        }
+    }
+    
+    public java.util.LinkedList<String> getUserDetails(String user)
+    {
+        java.util.LinkedList<String> details = new java.util.LinkedList<>();
+        details.add(user);
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select first_name,last_name,email from userprofiles where login = ?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute
+                (boundStatement.bind( // here you are binding the 'boundStatement'
+                    user));
+        
+        if (rs.isExhausted()) 
+        {
+            return details;
+        } else 
+        {
+            for (Row row : rs) 
+            {
+                details.add(row.getString("first_name"));
+                details.add(row.getString("last_name"));
+                
+                Set<String> emails = row.getSet("email", String.class);
+                Iterator iterator = emails.iterator();
+                while(iterator.hasNext()){
+                    details.add(iterator.next().toString());
+                }
+            }
+            System.out.println(details);
+        return details;
         }
     }
 }
