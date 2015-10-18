@@ -12,17 +12,15 @@ import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.Statement;
 import com.datastax.driver.core.UDTValue;
 import com.datastax.driver.core.UserType;
-import com.datastax.driver.core.querybuilder.QueryBuilder;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Constants;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 import uk.ac.dundee.computing.aec.instagrim.lib.*;
@@ -52,7 +50,7 @@ public class User {
         PreparedStatement ps = session.prepare("insert into userprofiles (login,password,first_name,last_name,email,addresses) Values(?,?,?,?,?,?)");
         Convertors convertor = new Convertors();
         java.util.UUID addressid = convertor.getTimeUUID();
-        Set<String> emails = new TreeSet<>();
+        Set<String> emails = new HashSet<>();
         emails.add(email);
         
         UserType addresses = session.getCluster().getMetadata().getKeyspace("instagrim").getUserType("address");
@@ -133,6 +131,34 @@ public class User {
             return false;
         } else {
             return true;
+        }
+    }
+    
+    public boolean EmailRegistered(String Email)
+    {
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select email from userprofiles");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute(boundStatement);
+        //System.out.println(rs);
+        if (rs.isExhausted()) 
+        {
+            //System.out.println("Email Not Found");
+            return false;
+        } else 
+        {
+            for (Row row : rs) 
+            {
+                Set<String> emails = row.getSet("email", String.class);
+                if(emails.contains(Email))
+                {
+                    //System.out.println("Email found");
+                    return true;
+                }
+            }
+        //System.out.println("Email Not Found");
+        return false;
         }
     }
 }

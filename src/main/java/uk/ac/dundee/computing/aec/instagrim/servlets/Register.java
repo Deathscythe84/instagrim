@@ -45,7 +45,8 @@ public class Register extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
         String fname=request.getParameter("firstname");
@@ -58,19 +59,30 @@ public class Register extends HttpServlet {
         User us=new User();
         us.setCluster(cluster);
         boolean userexist = us.UserExist(username);
+        boolean emailregistered = us.EmailRegistered(email);
         if(userexist)
         {
             request.setAttribute("Error", "Username Already Taken");
             RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
             rd.forward(request,response);
         }
-        else{
-        us.RegisterUser(username, password,fname,sname,email,addressstreet,addresscity,addresszip);
+        else
+        {
+            if(emailregistered)
+            {
+            request.setAttribute("Error", "Email Already Registered");
+            RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
+            rd.forward(request,response);  
+            }
+            else
+            {
+            us.RegisterUser(username, password,fname,sname,email,addressstreet,addresscity,addresszip);
 
-        //Auto Login code
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Login");
-        rd.forward(request, response);
-        //response.sendRedirect("/Instagrim");
+            //Auto Login code
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Login");
+            rd.forward(request, response);
+            //response.sendRedirect("/Instagrim");
+            }
         }
     }
 
