@@ -45,29 +45,38 @@ public class Register extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
-        
-        if(username == "" || password == "")
+        String fname=request.getParameter("firstname");
+        String sname=request.getParameter("lastname");
+        String email=request.getParameter("email");
+        String addressstreet=request.getParameter("addressstreet");
+        String addresscity=request.getParameter("addresscity");
+        String addresszip=request.getParameter("addresszip");
+
+        User us=new User();
+        us.setCluster(cluster);
+        boolean userexist = us.UserExist(username);
+        boolean emailregistered = us.EmailRegistered(email);
+        if(userexist)
         {
-            request.setAttribute("Error", "Username And Password Required");
+            request.setAttribute("Error", "Username Already Taken");
             RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
             rd.forward(request,response);
         }
         else
         {
-            User us=new User();
-            us.setCluster(cluster);
-            boolean userexist = us.UserExist(username);
-            if(userexist)
+            if(emailregistered)
             {
-                request.setAttribute("Error", "Username Already Taken");
-                RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
-                rd.forward(request,response);
+            request.setAttribute("Error", "Email Already Registered");
+            RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
+            rd.forward(request,response);  
             }
-            else{
-            us.RegisterUser(username, password);
+            else
+            {
+            us.RegisterUser(username, password,fname,sname,email,addressstreet,addresscity,addresszip);
 
             //Auto Login code
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Login");
