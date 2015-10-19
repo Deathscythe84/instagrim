@@ -22,23 +22,23 @@
                 if(pp==null)
                 {
                 %>
-                <h1>Nothing</h1>
+                <h3>No User Picture</h3>
                 <%
                 }
                     else
                     {
                         System.out.println("error at picid");// + pp.getSUUID());
                      %>
-                <img src="/Instagrim/Thumb/<%=pp.getSUUID()%>">
+                <img src="/Instagrim/ProfilePic/<%=pp.getSUUID()%>" width="25%">
                 <% } %>
             </div>
             
             <div>
                 <%
             java.util.LinkedList<String> lsUser = (java.util.LinkedList<String>) request.getAttribute("Details");
-            if (lsUser == null) {
+            if (lsUser.isEmpty()) {
                 %>
-                <p>No details found</p>
+                <h3>No details found</h3>
                 <%
             } else 
             {
@@ -68,13 +68,13 @@
         %>
             </table>
             </div>
-        </div><br><hr>
+        </div><hr>
         <div>
             <%
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
             if (lsPics == null) {
         %>
-        <p>No Pictures found</p>
+        <h3>No Pictures found</h3>
         <%
         } else {
             Iterator<Pic> iterator;

@@ -35,6 +35,7 @@ import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
     "/Image",
     "/Image/*",
     "/Thumb/*",
+    "/ProfilePic/*",
     "/Images",
     "/Images/*"
 })
@@ -57,6 +58,7 @@ public class Image extends HttpServlet {
         CommandsMap.put("Image", 1);
         CommandsMap.put("Images", 2);
         CommandsMap.put("Thumb", 3);
+        CommandsMap.put("ProfilePic", 4);
 
     }
 
@@ -97,6 +99,13 @@ public class Image extends HttpServlet {
             case 3:
                 if(args.length>=3)
                 {DisplayImage(Convertors.DISPLAY_THUMB,args[2],  response);
+                break;}
+                else{
+                response.sendRedirect(Convertors.RootPage+"index.jsp");
+                break;}
+            case 4:
+                if(args.length>=3)
+                {DisplayImage(Convertors.DISPLAY_IMAGE,args[2], response);
                 break;}
                 else{
                 response.sendRedirect(Convertors.RootPage+"index.jsp");
