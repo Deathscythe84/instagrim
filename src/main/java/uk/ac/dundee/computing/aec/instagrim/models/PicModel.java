@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import static org.imgscalr.Scalr.*;
@@ -208,7 +209,8 @@ public class PicModel {
         session.close();
         Pic p = new Pic();
         p.setPic(bImage, length, type);
-
+        p.setUUID(picid);
+        
         return p;
 
     }

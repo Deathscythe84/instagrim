@@ -85,21 +85,21 @@ public class Image extends HttpServlet {
                 {DisplayImage(Convertors.DISPLAY_PROCESSED,args[2], response);
                 break;}
                 else{
-                response.sendRedirect(Convertors.RootPage);
+                response.sendRedirect(Convertors.RootPage+"index.jsp");
                 break;}
             case 2:
                 if(args.length>=3)
                 {DisplayImageList(args[2], request, response);
                 break;}
                 else{
-                response.sendRedirect(Convertors.RootPage);
+                response.sendRedirect(Convertors.RootPage+"index.jsp");
                 break;}
             case 3:
                 if(args.length>=3)
                 {DisplayImage(Convertors.DISPLAY_THUMB,args[2],  response);
                 break;}
                 else{
-                response.sendRedirect(Convertors.RootPage);
+                response.sendRedirect(Convertors.RootPage+"index.jsp");
                 break;}
             default:
                 error("Bad Operator", response);

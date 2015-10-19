@@ -85,7 +85,7 @@ public class Profile extends HttpServlet {
                 getUserDetails(args[2],request,response);
                 break;}
                 else{
-                response.sendRedirect(Convertors.RootPage);
+                response.sendRedirect(Convertors.RootPage+"index.jsp");
                 break;}
             case 2:
                 System.out.println("Case2");
@@ -93,7 +93,7 @@ public class Profile extends HttpServlet {
                 {//DisplayImage(Convertors.DISPLAY_PROCESSED,args[2], response);
                 break;}
                 else{
-                response.sendRedirect(Convertors.RootPage);
+                response.sendRedirect(Convertors.RootPage+"index.jsp");
                 break;}
             default:
                 error("Bad Operator", response);
@@ -145,11 +145,14 @@ public class Profile extends HttpServlet {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
         java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(User);
+        Pic Profilepic = tm.getPic(Convertors.DISPLAY_IMAGE, us.getProfilePic(User));
         RequestDispatcher rd = request.getRequestDispatcher("/UserProfile.jsp");
+        
         request.setAttribute("Pics", lsPics);
         request.setAttribute("Details", lsUser);
-        //rd.forward(request, response);
+        request.setAttribute("ProfilePic", Profilepic);
         
+        rd.forward(request, response);
         
         }
 }
