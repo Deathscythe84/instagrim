@@ -11,10 +11,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>User Profile</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>User Profile</h1>
         <div>
             <div>
                 <%
@@ -27,7 +27,6 @@
                 }
                     else
                     {
-                        System.out.println("error at picid");// + pp.getSUUID());
                      %>
                 <img src="/Instagrim/ProfilePic/<%=pp.getSUUID()%>" width="25%">
                 <% } %>
@@ -38,7 +37,7 @@
             java.util.LinkedList<String> lsUser = (java.util.LinkedList<String>) request.getAttribute("Details");
             if (lsUser.isEmpty()) {
                 %>
-                <h3>No details found</h3>
+                <h3>No details found</h3>${pageContext.request.getAttribute("test")}
                 <%
             } else 
             {
