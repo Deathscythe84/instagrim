@@ -29,7 +29,19 @@
                     {
                      %>
                 <img src="/Instagrim/ProfilePic/<%=pp.getSUUID()%>" width="25%">
-                <% } %>
+                <% } 
+                LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                        if (lg != null) {
+                            String UserName = lg.getUsername();
+                            if (UserName.equals(request.getAttribute("Username"))) {
+                                %>
+                                <form method="POST" enctype="multipart/form-data" action="Profile">
+                                    <input type="file" name="upfile">
+                                    <input type="Submit" value="Change Pic" />
+                                </form>
+                                <%
+                            }}
+                %>
             </div>
             
             <div>
