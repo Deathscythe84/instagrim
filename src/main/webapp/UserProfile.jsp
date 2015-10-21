@@ -90,12 +90,17 @@
         } else {
             Iterator<Pic> iterator;
             iterator = lsPics.iterator();
+            int i =1;
             while (iterator.hasNext()) {
                 Pic p = (Pic) iterator.next();
 
         %>
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/><%
-
+        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img width="19%" src="/Instagrim/Image/<%=p.getSUUID()%>"></a><%
+            if(i%5==0)
+            {
+                %><br><%
+                i++;
+            }
             }
             }
         %>
