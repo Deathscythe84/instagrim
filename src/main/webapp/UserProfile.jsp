@@ -47,7 +47,8 @@
             <div>
                 <%
             java.util.LinkedList<String> lsUser = (java.util.LinkedList<String>) request.getAttribute("Details");
-            if (lsUser.isEmpty()) {
+            System.out.println(lsUser);
+            if (lsUser == null || lsUser.isEmpty()) {
                 %>
                 <h3>No details found</h3>${pageContext.request.getAttribute("test")}
                 <%
@@ -95,7 +96,7 @@
                 Pic p = (Pic) iterator.next();
 
         %>
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img width="19%" src="/Instagrim/Image/<%=p.getSUUID()%>"></a><%
+        <a href="/Instagrim/Comments/<%=p.getSUUID()%>" ><img width="19%" src="/Instagrim/Image/<%=p.getSUUID()%>"></a><%
             if(i%5==0)
             {
                 %><br><%

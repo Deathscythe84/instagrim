@@ -31,6 +31,7 @@ import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.UUID;
 import javax.imageio.ImageIO;
 import static org.imgscalr.Scalr.*;
 import org.imgscalr.Scalr.Method;
@@ -252,4 +253,44 @@ public class PicModel {
 
     }
 
+    public java.util.LinkedList<String> getCommentsForPic(String picId) {
+        java.util.LinkedList<String> Comments = new java.util.LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select * from piccommentlist where picid =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        UUID.fromString(picId)));
+        if (rs.isExhausted()) {
+            System.out.println("No Comments returned");
+            return null;
+        } else {
+            for (Row row : rs) {
+                Comments.add(row.getString("user"));
+                Comments.add(row.getString("comment"));
+                //Pic pic = new Pic();
+                //java.util.UUID UUID = row.getUUID("picid");
+                //System.out.println("UUID" + UUID.toString());
+                //pic.setUUID(UUID);
+                //Pics.add(pic);
+
+            }
+        }
+        return Comments;
+    }
+    
+    public void insertComment(String comment, String user, UUID picid) 
+        {
+            Session session = cluster.connect("instagrim");
+            
+            PreparedStatement ps = session.prepare("insert into piccommentlist ( picid, user, pic_added, comment) values(?,?,?,?)");
+
+            BoundStatement bs = new BoundStatement(ps);
+
+            Date DateAdded = new Date();
+            session.execute(bs.bind(picid, user, DateAdded, comment));
+            session.close();
+            
+        }
 }
