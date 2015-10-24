@@ -2,8 +2,15 @@
 <%@page import="uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn"%>
 <%@page import="uk.ac.dundee.computing.aec.instagrim.lib.Convertors"%>
 <%@ page pageEncoding="UTF-8" %>
+<script>
+    function searchforprofile()
+    {
+        window.location = document.getElementById("root").value+"Profile/"+document.getElementById("sb").value;
+    }
+</script>
 <nav>
     <ul>
+        <li><input type="hidden" id="root" value="<%=Convertors.RootPage%>"/><input type="text" name="searchbox" id="sb"/><input type="Submit" value="Search" onclick="searchforprofile()"/></li>
         <li><a href=<%=Convertors.RootPage+"upload.jsp"%>>Upload</a></li>
             <%
                 LoggedIn navlg = (LoggedIn) session.getAttribute("LoggedIn");
