@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -31,7 +32,7 @@ import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
  *
  * @author Alan
  */
-@WebServlet(name = "Profile", urlPatterns = {"/Profiles","/Profile/*"})
+@WebServlet(name = "Profile", urlPatterns = {"/Profiles/","/Profile/*"})
 @MultipartConfig
 public class Profile extends HttpServlet {    
 
@@ -95,11 +96,12 @@ public class Profile extends HttpServlet {
                 break;}
             case 2:
                 System.out.println("Case2");
-                if(args.length>=3)
+                //if(args.length>=3)
                 {//DisplayImage(Convertors.DISPLAY_PROCESSED,args[2], response);
-                break;}
-                else{
-                response.sendRedirect(Convertors.RootPage+"index.jsp");
+                    getUsers(request,response);
+                //break;}
+                //else{
+                //response.sendRedirect(Convertors.RootPage+"index.jsp");
                 break;}
             default:
                 error("Bad Operator", response);
@@ -184,6 +186,41 @@ public class Profile extends HttpServlet {
         request.setAttribute("Details", lsUser);
         request.setAttribute("ProfilePic", Profilepic);
         
+        rd.forward(request, response);
+        
+        }
+        
+        private void getUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+        {
+        User us = new User();
+        us.setCluster(cluster);
+        java.util.LinkedList<String> lsUser = us.getUsers();
+        java.util.LinkedList<String> lsUserPics = new java.util.LinkedList<>();
+            PicModel tm = new PicModel();
+            tm.setCluster(cluster);
+        
+            Iterator<String> iterator;
+            iterator = lsUser.iterator();
+            while (iterator.hasNext()) 
+            {
+                String s = (String) iterator.next();
+                Pic pic = tm.getPic(Convertors.DISPLAY_IMAGE, us.getProfilePic(s));
+                
+                if(pic!=null)
+                {lsUserPics.add(pic.getSUUID());}
+                else
+                {lsUserPics.add("null");}
+                
+                lsUserPics.add(s);
+            }
+//        PicModel tm = new PicModel();
+//        tm.setCluster(cluster);
+//        java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(User);
+//        Pic Profilepic = tm.getPic(Convertors.DISPLAY_IMAGE, us.getProfilePic(User));
+        RequestDispatcher rd = request.getRequestDispatcher("/Users.jsp");
+        
+        request.setAttribute("Username", lsUserPics);
+                
         rd.forward(request, response);
         
         }

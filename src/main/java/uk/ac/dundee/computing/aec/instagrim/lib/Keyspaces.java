@@ -55,6 +55,14 @@ public final class Keyspaces {
                     + "      email set<text>,\n"
                     + "      addresses  map<text, frozen <address>>\n"
                     + "  );";
+            String Createpiccommentlist = "CREATE TABLE if not exists instagrim.piccommentlist (\n"
+                    + "picid uuid,\n"
+                    + "user varchar,\n"
+                    + "pic_added timestamp,\n"
+                    + "comment varchar, \n"
+                    + "PRIMARY KEY (picid,pic_added)\n"
+                    + ") WITH CLUSTERING ORDER BY (pic_added desc);";
+            
             Session session = c.connect();
             try {
                 PreparedStatement statement = session
@@ -107,8 +115,16 @@ public final class Keyspaces {
             } catch (Exception et) {
                 System.out.println("Can't create user profile pic list table " + et);
             }
+            try {
+                SimpleStatement cqlQuery = new SimpleStatement(Createpiccommentlist);
+                session.execute(cqlQuery);
+            } catch (Exception et) {
+                System.out.println("Can't create pic comment list table " + et);
+            }
             session.close();
 
+            
+            
         } catch (Exception et) {
             System.out.println("Other keyspace or coulm definition error" + et);
         }

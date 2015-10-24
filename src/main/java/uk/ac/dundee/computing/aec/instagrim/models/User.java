@@ -221,4 +221,31 @@ public class User {
         return null;
         }
     }
+    
+    public java.util.LinkedList<String> getUsers()
+    {
+        java.util.LinkedList<String> details = new java.util.LinkedList<>();
+
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select login from userprofiles");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute
+                (boundStatement.bind( // here you are binding the 'boundStatement'
+                    ));
+        
+        if (rs.isExhausted()) 
+        {
+            return details;
+        } else 
+        {
+            for (Row row : rs) 
+            {
+                details.add(row.getString("login")); }
+            }
+            System.out.println(details);
+        return details;
+    }
+    
+    
 }

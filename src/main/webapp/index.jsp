@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="uk.ac.dundee.computing.aec.instagrim.lib.Convertors"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
 <!DOCTYPE html>
@@ -16,39 +17,9 @@
     </head>
     <body>
         <header>
-            <h1>InstaGrim ! </h1>
-            <h2>Your world in Black and White</h2>
+        <h1>Instagrim</h1>
+        <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
         </header>
-        <nav>
-            <ul>
-
-               
-                <li><a href="upload.jsp">Upload</a></li>
-                    <%
-                        
-                        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-                        if (lg != null) {
-                            String UserName = lg.getUsername();
-                            if (lg.getlogedin()) {
-                    %>
-                <li><a href="Logout">Logout</a></li>
-                <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
-                    <%}
-                            }else{
-                                %>
-                 <li><a href="register.jsp">Register</a></li>
-                <li><a href="login.jsp">Login</a></li>
-                <%
-                                        
-                            
-                    }%>
-            </ul>
-        </nav>
-        <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-                <li>&COPY; Andy C</li>
-            </ul>
-        </footer>
+        <%@include file="/WEB-INF/jspf/Footer.jspf" %>
     </body>
 </html>
