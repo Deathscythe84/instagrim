@@ -12,11 +12,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User Profile</title>
+        <link rel="stylesheet" type="text/css" href="/Instagrim/Styles.css" />
     </head>
     <body>
+        <header>
         <h1>User Profile</h1>
-        <div>
-            <div>
+        <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
+        </header>
+        <div id="profileblock">
+            <div id="profilepic">
                 <%
                 Pic pp = (Pic) request.getAttribute("ProfilePic");
                 if(pp==null)
@@ -28,7 +32,7 @@
                     else
                     {
                      %>
-                <img src="/Instagrim/ProfilePic/<%=pp.getSUUID()%>" width="25%">
+                <img src="/Instagrim/ProfilePic/<%=pp.getSUUID()%>" width="100%">
                 <% } 
                 LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                         if (lg != null) {
@@ -44,7 +48,7 @@
                 %>
             </div>
             
-            <div>
+            <div id="profiledetails">
                 <%
             java.util.LinkedList<String> lsUser = (java.util.LinkedList<String>) request.getAttribute("Details");
             System.out.println(lsUser);
@@ -78,7 +82,7 @@
                 }
             }
         %>
-            </table>
+                </table>
             </div>
         </div><hr>
         <div>
@@ -96,7 +100,7 @@
                 Pic p = (Pic) iterator.next();
 
         %>
-        <a href="/Instagrim/Comments/<%=p.getSUUID()%>" ><img width="19%" src="/Instagrim/Image/<%=p.getSUUID()%>"></a><%
+        <a href=<%=Convertors.RootPage+"Comments/"+p.getSUUID()%>><img width=19%" src=<%=Convertors.RootPage+"Image/"%><%=p.getSUUID()%>></a><%
             if(i%5==0)
             {
                 %><br><%
@@ -106,5 +110,6 @@
             }
         %>
         </div>
+        <%@include file="/WEB-INF/jspf/Footer.jspf" %>
     </body>
 </html>

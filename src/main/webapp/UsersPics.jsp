@@ -4,6 +4,7 @@
     Author     : Administrator
 --%>
 
+<%@page import="uk.ac.dundee.computing.aec.instagrim.lib.Convertors"%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
@@ -16,17 +17,9 @@
     </head>
     <body>
         <header>
-        
-        <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
+        <h1>Instagrim Your Pics</h1>
+        <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
         </header>
-        
-        <nav>
-            <ul>
-                <li class="nav"><a href="/Instagrim/upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
-        </nav>
  
         <article>
             <h1>Your Pics</h1>
@@ -43,16 +36,12 @@
                 Pic p = (Pic) iterator.next();
 
         %>
-        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/><%
+        <a href=<%=Convertors.RootPage+"Image/"+p.getSUUID()%>><img src=<%=Convertors.RootPage+"Thumb/"%><%=p.getSUUID()%>></a><br/><%
 
             }
             }
         %>
         </article>
-        <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-            </ul>
-        </footer>
+        <%@include file="/WEB-INF/jspf/Footer.jspf" %>
     </body>
 </html>

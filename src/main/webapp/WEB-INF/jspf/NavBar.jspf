@@ -1,0 +1,26 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn"%>
+<%@page import="uk.ac.dundee.computing.aec.instagrim.lib.Convertors"%>
+<%@ page pageEncoding="UTF-8" %>
+<nav>
+    <ul>
+        <li><a href=<%=Convertors.RootPage+"upload.jsp"%>>Upload</a></li>
+            <%
+                LoggedIn navlg = (LoggedIn) session.getAttribute("LoggedIn");
+                if (navlg != null) {
+                    String UserName = navlg.getUsername();
+                    if (navlg.getlogedin()) {
+            %>
+        <li><a href=<%=Convertors.RootPage+"Logout"%>>Logout</a></li>
+        <li><a href=<%=Convertors.RootPage+"Images/"%><%=navlg.getUsername()%>>Your Images</a></li>
+        <li><a href=<%=Convertors.RootPage+"Profile/"%><%=navlg.getUsername()%>>Your Profile</a></li>
+            <%}
+                    }else{
+                        %>
+        <li><a href=<%=Convertors.RootPage+"register.jsp"%>>Register</a></li>
+        <li><a href=<%=Convertors.RootPage+"login.jsp"%>>Login</a></li>
+        <%
+                }%>
+        <li><a href=<%=Convertors.RootPage+"Profiles/"%>>Profiles</a></li>
+    </ul>
+</nav>

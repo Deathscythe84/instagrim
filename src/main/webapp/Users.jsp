@@ -11,37 +11,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="Styles.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Users</title>
+        <link rel="stylesheet" type="text/css" href="/Instagrim/Styles.css" />
     </head>
     <body>
         <header>
-            <h1>InstaGrim ! </h1>
-            <h2>Your world in Black and White</h2>
+        <h1>Instagrim Users</h1>
+        <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
         </header>
-        <nav>
-            <ul>
-                <li><a href=<%=Convertors.RootPage+"upload.jsp"%>>Upload</a></li>
-                    <%
-                        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-                        if (lg != null) {
-                            String UserName = lg.getUsername();
-                            if (lg.getlogedin()) {
-                    %>
-                <li><a href="/Instagrim/Logout">Logout</a></li>
-                <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
-                <li><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Your Profile</a></li>
-                    <%}
-                            }else{
-                                %>
-                 <li><a href=<%=Convertors.RootPage+"register.jsp"%>>Register</a></li>
-                <li><a href=<%=Convertors.RootPage+"login.jsp"%>>Login</a></li>
-                <%
-                        }%>
-                <li><a href="/Instagrim/Profiles/">Profiles</a></li>
-            </ul>
-        </nav>
         <article>
          <%
             java.util.LinkedList<String> lsUser = (java.util.LinkedList<String>) request.getAttribute("Username");
@@ -70,7 +48,7 @@
                                 No Profile Picture
                                 <%
                                 }else{%>
-                                <img src="/Instagrim/ProfilePic/<%=s%>" height="100" >
+                                <img src=<%=Convertors.RootPage+"ProfilePic/"+s%> height="100" >
                                 <%}%>
                             </td>
                         <%
@@ -78,7 +56,7 @@
                     else
                     {
                         %>
-                        <td><a href="/Instagrim/Profile/<%=s%>"><%=s%></a></td></tr>
+                        <td><a href=<%=Convertors.RootPage+"Profile/"+s%>><%=s%></a></td></tr>
                         <%
                     }
                 }
@@ -86,11 +64,6 @@
         %>
                 </table>
         </article>
-        <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-                
-            </ul>
-        </footer>
+        <%@include file="/WEB-INF/jspf/Footer.jspf" %>
     </body>
 </html>

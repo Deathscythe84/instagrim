@@ -1,0 +1,8 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="uk.ac.dundee.computing.aec.instagrim.lib.Convertors"%>
+<%@ page pageEncoding="UTF-8" %>
+<footer>
+    <ul>
+        <li class="footer"><a href="<%=Convertors.RootPage%>">Home</a></li>
+    </ul>
+</footer>

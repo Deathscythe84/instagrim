@@ -10,7 +10,9 @@ public final class Convertors {
     public static int DISPLAY_IMAGE=0;
     public static int DISPLAY_THUMB=1;
     public static int DISPLAY_PROCESSED=2;
-    public static String RootPage = "http://localhost:8080/Instagrim/";
+    public static final String Host = "http://localhost:8080/";
+    //public static final String Host = "http://192.168.0.16:8080/";
+    public static String RootPage = Host+"Instagrim/";
     public void Convertors() {
 
     }
