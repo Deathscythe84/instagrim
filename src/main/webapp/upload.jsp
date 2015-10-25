@@ -11,12 +11,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Instagrim</title>
-        <link rel="stylesheet" type="text/css" href="/Instagrim/Styles.css" />
+        <title>Instagrimoire</title>
+        <link rel="stylesheet" type="text/css" href="/Instagrimoire/Styles.css" />
     </head>
     <body>
         <header>
-        <h1>Instagrim Upload</h1>
+        <h1>Instagrimoire Upload</h1>
         <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
         </header>
  
@@ -24,7 +24,9 @@
             <h3>File Upload</h3>
             <form method="POST" enctype="multipart/form-data" action="Image">
                 File to upload: <input type="file" name="upfile"><br/>
-
+                <input type="radio" name="filter" value="0" checked> Grayscale
+                <input type="radio" name="filter" value="1"> Full Colour
+                <input type="radio" name="filter" value="2"> Sepia
                 <br/>
                 <input type="submit" value="Press"> to upload the file!
             </form>

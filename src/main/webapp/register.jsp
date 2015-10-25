@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Instagrim</title>
+        <title>Instagrimoire</title>
         <link rel="stylesheet" type="text/css" href="Styles.css" />
         <script>
             function Validate(element){
@@ -47,10 +47,17 @@
                     return false;
             }
         </script>
+        <% 
+                LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                if(lg != null)
+                {
+                    response.sendRedirect("/Instagrimoire/index.jsp");
+                }
+        %>
     </head>
     <body>
         <header>
-        <h1>Instagrim Register</h1>
+        <h1>Instagrimoire Register</h1>
         <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
         </header>
        

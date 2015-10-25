@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User Profile</title>
-        <link rel="stylesheet" type="text/css" href="/Instagrim/Styles.css" />
+        <link rel="stylesheet" type="text/css" href="/Instagrimoire/Styles.css" />
     </head>
     <body>
         <header>
@@ -26,13 +26,13 @@
                 if(pp==null)
                 {
                 %>
-                <h3>No User Picture</h3>
+                <img src=<%=Convertors.RootPage%>blank-face.jpg width="100%" alt="No Profile Picture"/>
                 <%
                 }
                     else
                     {
                      %>
-                <img src="/Instagrim/ProfilePic/<%=pp.getSUUID()%>" width="100%">
+                <img src="/Instagrimoire/ProfilePic/<%=pp.getSUUID()%>" width="100%">
                 <% } 
                 LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                         if (lg != null) {

@@ -12,12 +12,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Instagrim</title>
-        <link rel="stylesheet" type="text/css" href="/Instagrim/Styles.css" />
+        <title>Instagrimoire</title>
+        <link rel="stylesheet" type="text/css" href="/Instagrimoire/Styles.css" />
     </head>
     <body>
         <header>
-        <h1>Instagrim Your Pics</h1>
+        <h1>Instagrimoire Your Pics</h1>
         <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
         </header>
  
