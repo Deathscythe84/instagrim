@@ -11,13 +11,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Instagrim</title>
+        <title>Instagrimoire</title>
         <link rel="stylesheet" type="text/css" href="Styles.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
         <header>
-        <h1>Instagrim</h1>
+        <h1>Instagrimoire</h1>
         <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
         </header>
         <%@include file="/WEB-INF/jspf/Footer.jspf" %>

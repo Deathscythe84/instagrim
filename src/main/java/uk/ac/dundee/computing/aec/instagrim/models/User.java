@@ -46,14 +46,14 @@ public class User {
             System.out.println("Can't check your password");
             return false;
         }
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimoire");
         PreparedStatement ps = session.prepare("insert into userprofiles (login,password,first_name,last_name,email,addresses) Values(?,?,?,?,?,?)");
         Convertors convertor = new Convertors();
         java.util.UUID addressid = convertor.getTimeUUID();
         Set<String> emails = new HashSet<>();
         emails.add(email);
         
-        UserType addresses = session.getCluster().getMetadata().getKeyspace("instagrim").getUserType("address");
+        UserType addresses = session.getCluster().getMetadata().getKeyspace("instagrimoire").getUserType("address");
         UDTValue addressvalue = addresses.newValue()
                 .setString("street", addressstreet)
                 .setString("city", addresscity)
@@ -92,7 +92,7 @@ public class User {
             System.out.println("Can't check your password");
             return false;
         }
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimoire");
         PreparedStatement ps = session.prepare("select password from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -119,7 +119,7 @@ public class User {
     }
 
     public boolean UserExist(String username){
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimoire");
         PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -136,7 +136,7 @@ public class User {
     
     public boolean EmailRegistered(String Email)
     {
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimoire");
         PreparedStatement ps = session.prepare("select email from userprofiles");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -166,7 +166,7 @@ public class User {
     {
         java.util.LinkedList<String> details = new java.util.LinkedList<>();
 
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimoire");
         PreparedStatement ps = session.prepare("select login,first_name,last_name,email from userprofiles where login = ?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -202,7 +202,7 @@ public class User {
     
     public UUID getProfilePic(String User)
     {
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimoire");
         PreparedStatement ps = session.prepare("select picid from userppiclist where user =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -226,7 +226,7 @@ public class User {
     {
         java.util.LinkedList<String> details = new java.util.LinkedList<>();
 
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimoire");
         PreparedStatement ps = session.prepare("select login from userprofiles");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);

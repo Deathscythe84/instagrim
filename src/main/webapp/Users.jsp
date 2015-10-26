@@ -13,11 +13,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Users</title>
-        <link rel="stylesheet" type="text/css" href="/Instagrim/Styles.css" />
+        <link rel="stylesheet" type="text/css" href="/Instagrimoire/Styles.css" />
     </head>
     <body>
         <header>
-        <h1>Instagrim Users</h1>
+        <h1>Instagrimoire Users</h1>
         <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
         </header>
         <article>

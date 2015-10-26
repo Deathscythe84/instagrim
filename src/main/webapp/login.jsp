@@ -11,19 +11,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Instagrim</title>
+        <title>Instagrimoire</title>
         <link rel="stylesheet" type="text/css" href="Styles.css" />
             <% 
                 LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                 if(lg != null)
                 {
-                    response.sendRedirect("/Instagrim/index.jsp");
+                    response.sendRedirect("/Instagrimoire/index.jsp");
                 }
             %>
     </head>
     <body>
         <header>
-        <h1>Instagrim Login</h1>
+        <h1>Instagrimoire Login</h1>
         <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
         </header>
        

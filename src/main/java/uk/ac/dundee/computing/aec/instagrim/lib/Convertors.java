@@ -12,7 +12,8 @@ public final class Convertors {
     public static int DISPLAY_PROCESSED=2;
     public static final String Host = "http://localhost:8080/";
     //public static final String Host = "http://192.168.0.16:8080/";
-    public static String RootPage = Host+"Instagrim/";
+    //public static final String Host = "http://ac32007.cloudapp.net:8080";
+    public static String RootPage = Host+"Instagrimoire/";
     public void Convertors() {
 
     }
