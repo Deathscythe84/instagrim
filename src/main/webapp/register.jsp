@@ -51,7 +51,7 @@
                 LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                 if(lg != null)
                 {
-                    response.sendRedirect("/Instagrimoire/index.jsp");
+                    response.sendRedirect(Convertors.RootPage);
                 }
         %>
     </head>

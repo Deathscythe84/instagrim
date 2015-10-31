@@ -92,7 +92,7 @@ public class Profile extends HttpServlet {
                 getUserDetails(args[2],request,response);
                 break;}
                 else{
-                response.sendRedirect(Convertors.RootPage+"index.jsp");
+                response.sendRedirect(Convertors.RootPage);
                 break;}
             case 2:
                 System.out.println("Case2");

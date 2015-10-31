@@ -11,7 +11,7 @@
 <nav>
     <ul>
         <li><input type="hidden" id="root" value="<%=Convertors.RootPage%>"/><input type="text" name="searchbox" id="sb"/><input type="Submit" value="Search" onclick="searchforprofile()"/></li>
-        <li><a href=<%=Convertors.RootPage+"upload.jsp"%>>Upload</a></li>
+        <li><a href=<%=Convertors.RootPage+"Upload"%>>Upload</a></li>
             <%
                 LoggedIn navlg = (LoggedIn) session.getAttribute("LoggedIn");
                 if (navlg != null) {
@@ -24,8 +24,8 @@
             <%}
                     }else{
                         %>
-        <li><a href=<%=Convertors.RootPage+"register.jsp"%>>Register</a></li>
-        <li><a href=<%=Convertors.RootPage+"login.jsp"%>>Login</a></li>
+        <li><a href=<%=Convertors.RootPage+"Register"%>>Register</a></li>
+        <li><a href=<%=Convertors.RootPage+"Login"%>>Login</a></li>
         <%
                 }%>
         <li><a href=<%=Convertors.RootPage+"Profiles/"%>>Profiles</a></li>
