@@ -13,40 +13,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Instagrimoire</title>
         <link rel="stylesheet" type="text/css" href="Styles.css" />
-        <script>
-            function Validate(element){
-                if(CheckEmpty(element))
-                {
-                    document.getElementById(element.id).style.backgroundColor='Red';
-                }
-                else
-                {
-                    document.getElementById(element.id).style.backgroundColor='White';
-                }
-                    if(!CheckEmpty(document.getElementById("username"))
-                            &&!CheckEmpty(document.getElementById("password"))
-                            &&!CheckEmpty(document.getElementById("firstname"))
-                            &&!CheckEmpty(document.getElementById("lastname"))
-                            &&!CheckEmpty(document.getElementById("email"))
-                            &&!CheckEmpty(document.getElementById("addressstreet"))
-                            &&!CheckEmpty(document.getElementById("addresscity"))
-                            &&!CheckEmpty(document.getElementById("addresszip"))
-                            )
-                    {
-                        document.getElementById("Submit").disabled=false;
-                    }
-                    else
-                    {
-                        document.getElementById("Submit").disabled=true;
-                    }
-                }
-            function CheckEmpty(element){
-                if(document.getElementById(element.id).value.toString()==="")
-                    return true;
-                else
-                    return false;
-            }
-        </script>
         <% 
                 LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                 if(lg != null)
@@ -67,17 +33,17 @@
             if(error!=null){%><%=error%><%}%>
             <form method="POST"  action="Register">
                 <ul>
-                    <li>User Name <input type="text" name="username" id="username" onkeyup="Validate(this);"></li>
-                    <li>Password <input type="password" name="password" id="password" onkeyup="Validate(this);"></li>
-                    <li>First Name <input type="text" name="firstname" id="firstname" onkeyup="Validate(this);"></li>
-                    <li>Last Name <input type="text" name="lastname" id="lastname" onkeyup="Validate(this);"></li>
-                    <li>Email <input type="email" name="email" id="email" onkeyup="Validate(this);"></li>
-                    <li>Address:Street <input type="text" name="addressstreet" id="addressstreet" onkeyup="Validate(this);"></li>
-                    <li>Address:City <input type="text" name="addresscity" id="addresscity" onkeyup="Validate(this);"></li>
-                    <li>Address:Zip Code <input type="text" name="addresszip" id="addresszip" onkeyup="Validate(this);"></li>
+                    <li>User Name <input type="text" name="username" id="username" required></li>
+                    <li>Password <input type="password" name="password" id="password" required></li>
+                    <li>First Name <input type="text" name="firstname" id="firstname" required></li>
+                    <li>Last Name <input type="text" name="lastname" id="lastname" required></li>
+                    <li>Email <input type="email" name="email" id="email" required></li>
+                    <li>Address:Street <input type="text" name="addressstreet" id="addressstreet" required></li>
+                    <li>Address:City <input type="text" name="addresscity" id="addresscity" required></li>
+                    <li>Address:Zip Code <input type="text" name="addresszip" id="addresszip" required></li>
                 </ul>
                 <br/>
-                <input type="submit" id="Submit" disabled="true" value="Register"> 
+                <input type="submit" id="Submit" value="Register"> 
             </form>
 
         </article>

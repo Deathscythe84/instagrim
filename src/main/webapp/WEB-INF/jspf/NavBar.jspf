@@ -10,14 +10,16 @@
 </script>
 <nav>
     <ul>
-        <li><input type="hidden" id="root" value="<%=Convertors.RootPage%>"/><input type="text" name="searchbox" id="sb"/><input type="Submit" value="Search" onclick="searchforprofile()"/></li>
-        <li><a href=<%=Convertors.RootPage+"Upload"%>>Upload</a></li>
+        <li><input type="hidden" id="root" value="<%=Convertors.RootPage%>"/>
+            <input type="text" name="searchbox" id="sb"/><input type="Submit" value="Search" onclick="searchforprofile()"/>
+        </li>
             <%
                 LoggedIn navlg = (LoggedIn) session.getAttribute("LoggedIn");
                 if (navlg != null) {
                     String UserName = navlg.getUsername();
                     if (navlg.getlogedin()) {
             %>
+        <li><a href=<%=Convertors.RootPage+"Upload"%>>Upload</a></li>
         <li><a href=<%=Convertors.RootPage+"Logout"%>>Logout</a></li>
         <li><a href=<%=Convertors.RootPage+"Images/"%><%=navlg.getUsername()%>>Your Images</a></li>
         <li><a href=<%=Convertors.RootPage+"Profile/"%><%=navlg.getUsername()%>>Your Profile</a></li>
