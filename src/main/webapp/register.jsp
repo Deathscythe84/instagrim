@@ -4,42 +4,49 @@
     Author     : Administrator
 --%>
 
+<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn"%>
+<%@page import="uk.ac.dundee.computing.aec.instagrim.lib.Convertors"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Instagrim</title>
+        <title>Instagrimoire</title>
         <link rel="stylesheet" type="text/css" href="Styles.css" />
+        <% 
+                LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                if(lg != null)
+                {
+                    response.sendRedirect(Convertors.RootPage);
+                }
+        %>
     </head>
     <body>
         <header>
-        <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
+        <h1>Instagrimoire Register</h1>
+        <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
         </header>
-        <nav>
-            <ul>
-                
-                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
-        </nav>
        
         <article>
             <h3>Register as user</h3>
+            <% String error = (String) request.getAttribute("Error");
+            if(error!=null){%><%=error%><%}%>
             <form method="POST"  action="Register">
                 <ul>
-                    <li>User Name <input type="text" name="username"></li>
-                    <li>Password <input type="password" name="password"></li>
+                    <li>User Name <input type="text" name="username" id="username" pattern="[A-Za-z0-9]{1,}" title="Letters and Numbers Only" required></li>
+                    <li>Password <input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must Contain One Upper and lowercase letter and a number and be of length 8 or higher" required></li>
+                    <li>First Name <input type="text" name="firstname" id="firstname" pattern="[A-Za-z]{1,}" title="Letters Only" required></li>
+                    <li>Last Name <input type="text" name="lastname" id="lastname" pattern="[A-Za-z]{1,}" title="Letters Only" required></li>
+                    <li>Email <input type="email" name="email" id="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$" required></li>
+                    <li>Address:Street <input type="text" name="addressstreet" id="addressstreet" pattern="[A-Za-z0-9]{1,}" title="Letters and Numbers Only" required></li>
+                    <li>Address:City <input type="text" name="addresscity" id="addresscity" pattern="[A-Za-z]{1,}" title="Letters Only" required></li>
+                    <li>Address:Zip Code <input type="text" name="addresszip" id="addresszip" pattern="[A-Za-z0-9]{1,}" title="Letters and Numbers Only" required></li>
                 </ul>
                 <br/>
-                <input type="submit" value="Register"> 
+                <input type="submit" id="Submit" value="Register"> 
             </form>
 
         </article>
-        <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-            </ul>
-        </footer>
+        <%@include file="/WEB-INF/jspf/Footer.jspf" %>
     </body>
 </html>

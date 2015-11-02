@@ -4,38 +4,34 @@
     Author     : Administrator
 --%>
 
+<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn"%>
+<%@page import="uk.ac.dundee.computing.aec.instagrim.lib.Convertors"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Instagrim</title>
-        <link rel="stylesheet" type="text/css" href="Styles.css" />
+        <title>Instagrimoire</title>
+        <link rel="stylesheet" type="text/css" href="/Instagrimoire/Styles.css" />
     </head>
     <body>
-        <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
-        <nav>
-            <ul>
-                <li class="nav"><a href="upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
-        </nav>
+        <header>
+        <h1>Instagrimoire Upload</h1>
+        <%@include file="/WEB-INF/jspf/NavBar.jspf" %>
+        </header>
  
         <article>
             <h3>File Upload</h3>
             <form method="POST" enctype="multipart/form-data" action="Image">
                 File to upload: <input type="file" name="upfile"><br/>
-
+                <input type="radio" name="filter" value="0" checked> Grayscale
+                <input type="radio" name="filter" value="1"> Full Colour
+                <input type="radio" name="filter" value="2"> Sepia
                 <br/>
                 <input type="submit" value="Press"> to upload the file!
             </form>
 
         </article>
-        <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-            </ul>
-        </footer>
+        <%@include file="/WEB-INF/jspf/Footer.jspf" %>
     </body>
 </html>

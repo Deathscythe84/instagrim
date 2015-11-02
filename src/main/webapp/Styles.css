@@ -12,5 +12,32 @@ and open the template in the editor.
 nav {
     text-align: left;
     border: 2px;
+}
+nav ul{
     float: right;
+}
+
+nav li{
+    display: inline;
+}
+
+#profileblock{
+    display: inline-block;
+}
+
+header{
+    width: 100%;
+    display: inline-block;
+}
+header h1{
+    float: left;
+}
+
+#profilepic{
+    width: 25%;
+    float: left;
+}
+
+#profiledetails{
+    float: left;
 }

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 
@@ -36,6 +37,12 @@ public class Login extends HttpServlet {
         cluster = CassandraHosts.getCluster();
     }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+            rd.forward(request,response);
+    }
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -50,27 +57,37 @@ public class Login extends HttpServlet {
         
         String username=request.getParameter("username");
         String password=request.getParameter("password");
-        
-        User us=new User();
-        us.setCluster(cluster);
-        boolean isValid=us.IsValidUser(username, password);
         HttpSession session=request.getSession();
-        System.out.println("Session in servlet "+session);
-        if (isValid){
-            LoggedIn lg= new LoggedIn();
-            lg.setLogedin();
-            lg.setUsername(username);
-            //request.setAttribute("LoggedIn", lg);
-            
-            session.setAttribute("LoggedIn", lg);
-            System.out.println("Session in servlet "+session);
-            RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
-	    rd.forward(request,response);
-            
-        }else{
-            response.sendRedirect("/Instagrim/login.jsp");
-        }
         
+        session.setAttribute("Error",null);
+        if(username=="" || password=="")
+        {
+            request.setAttribute("Error", "Username And Password Required");
+            RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+            rd.forward(request,response);
+        }
+        else{
+            User us=new User();
+            us.setCluster(cluster);
+            boolean isValid=us.IsValidUser(username, password);
+
+            System.out.println("Session in servlet "+session);
+            if (isValid){
+                LoggedIn lg= new LoggedIn();
+                lg.setLogedin();
+                lg.setUsername(username);
+                //request.setAttribute("LoggedIn", lg);
+
+                session.setAttribute("LoggedIn", lg);
+                System.out.println("Session in servlet "+session);
+                response.sendRedirect(Convertors.RootPage);
+
+            }else{
+                request.setAttribute("Error", "Username Or Password Not Found");
+                RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+                rd.forward(request,response);
+            }
+        }
     }
 
     /**
