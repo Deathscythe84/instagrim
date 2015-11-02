@@ -26,7 +26,7 @@
             System.out.println(lsUser);
             if (lsUser == null || lsUser.isEmpty()) {
                 %>
-                <h3>No details found</h3>${pageContext.request.getAttribute("test")}
+                <h3>No Profiles found</h3>${pageContext.request.getAttribute("test")}
                 <%
             } else 
             {

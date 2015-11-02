@@ -11,7 +11,7 @@
 <nav>
     <ul>
         <li><input type="hidden" id="root" value="<%=Convertors.RootPage%>"/>
-            <input type="text" name="searchbox" id="sb"/><input type="Submit" value="Search" onclick="searchforprofile()"/>
+            <input type="text" name="searchbox" id="sb" pattern="[A-Za-z0-9]{1,}" title="Letters and Numbers Only"/><input type="Submit" value="Search" onclick="searchforprofile()"/>
         </li>
             <%
                 LoggedIn navlg = (LoggedIn) session.getAttribute("LoggedIn");

@@ -33,14 +33,14 @@
             if(error!=null){%><%=error%><%}%>
             <form method="POST"  action="Register">
                 <ul>
-                    <li>User Name <input type="text" name="username" id="username" required></li>
-                    <li>Password <input type="password" name="password" id="password" required></li>
-                    <li>First Name <input type="text" name="firstname" id="firstname" required></li>
-                    <li>Last Name <input type="text" name="lastname" id="lastname" required></li>
-                    <li>Email <input type="email" name="email" id="email" required></li>
-                    <li>Address:Street <input type="text" name="addressstreet" id="addressstreet" required></li>
-                    <li>Address:City <input type="text" name="addresscity" id="addresscity" required></li>
-                    <li>Address:Zip Code <input type="text" name="addresszip" id="addresszip" required></li>
+                    <li>User Name <input type="text" name="username" id="username" pattern="[A-Za-z0-9]{1,}" title="Letters and Numbers Only" required></li>
+                    <li>Password <input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must Contain One Upper and lowercase letter and a number and be of length 8 or higher" required></li>
+                    <li>First Name <input type="text" name="firstname" id="firstname" pattern="[A-Za-z]{1,}" title="Letters Only" required></li>
+                    <li>Last Name <input type="text" name="lastname" id="lastname" pattern="[A-Za-z]{1,}" title="Letters Only" required></li>
+                    <li>Email <input type="email" name="email" id="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$" required></li>
+                    <li>Address:Street <input type="text" name="addressstreet" id="addressstreet" pattern="[A-Za-z0-9]{1,}" title="Letters and Numbers Only" required></li>
+                    <li>Address:City <input type="text" name="addresscity" id="addresscity" pattern="[A-Za-z]{1,}" title="Letters Only" required></li>
+                    <li>Address:Zip Code <input type="text" name="addresszip" id="addresszip" pattern="[A-Za-z0-9]{1,}" title="Letters and Numbers Only" required></li>
                 </ul>
                 <br/>
                 <input type="submit" id="Submit" value="Register"> 

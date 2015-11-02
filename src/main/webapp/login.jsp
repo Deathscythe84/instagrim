@@ -34,8 +34,8 @@
         
             <form method="POST"  action="Login">
                 <ul>
-                    <li>User Name <input type="text" name="username" required></li>
-                    <li>Password <input type="password" name="password" required></li>
+                    <li>User Name <input type="text" name="username" pattern="[A-Za-z0-9]{1,}" title="Letters and Numbers Only" required></li>
+                    <li>Password <input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must Contain One Upper and lowercase letter and a number and be of length 8 or higher" required></li>
                 </ul>
                 <br/>
                 <input type="submit" value="Login"> 
